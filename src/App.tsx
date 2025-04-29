@@ -14,7 +14,7 @@ function App() {
         setIsSexta(data.sextou)
         setIsLoading(false)
       })
-      .catch(err => {
+      .catch(() => {
         setError('Erro ao verificar se é sexta-feira')
         setIsLoading(false)
       })
