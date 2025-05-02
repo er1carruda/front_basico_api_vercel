@@ -1,20 +1,32 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+interface FridayResponse {
+  isFriday: boolean;
+  message: string;
+  dayOfWeek: string;
+  date: string;
+}
+
 function App() {
   const [isSexta, setIsSexta] = useState<boolean | null>(null)
+  const [message, setMessage] = useState<string>('')
+  const [dayOfWeek, setDayOfWeek] = useState<string>('')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [currentDateTime, setCurrentDateTime] = useState(new Date())
 
   useEffect(() => {
-    fetch('https://tarefa-api-express.onrender.com/')
+    fetch('https://tarefa-api-express.onrender.com/api/is-friday')
       .then(response => response.json())
-      .then(data => {
-        setIsSexta(data.sextou)
+      .then((data: FridayResponse) => {
+        setIsSexta(data.isFriday)
+        setMessage(data.message)
+        setDayOfWeek(data.dayOfWeek)
         setIsLoading(false)
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err)
         setError('Erro ao verificar se é sexta-feira')
         setIsLoading(false)
       })
@@ -48,6 +60,12 @@ function App() {
       <h1 className="text-4xl font-bold">
         {isSexta ? 'SEXTOU! 🎉' : 'Ainda não é sexta-feira 😢'}
       </h1>
+      <p className="text-lg text-gray-600">
+        {message}
+      </p>
+      <p className="text-md text-gray-500">
+        Hoje é {dayOfWeek}
+      </p>
       <p className="text-lg text-gray-600">
         {currentDateTime.toLocaleString('pt-BR', { 
           weekday: 'long', 
