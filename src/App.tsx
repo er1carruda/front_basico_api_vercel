@@ -58,11 +58,8 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4">
       <h1 className="text-4xl font-bold">
-        {isSexta ? 'SEXTOU! 🎉' : 'Ainda não é sexta-feira 😢'}
-      </h1>
-      <p className="text-lg text-gray-600">
         {message}
-      </p>
+      </h1>
       <p className="text-md text-gray-500">
         Hoje é {dayOfWeek}
       </p>
