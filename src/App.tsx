@@ -9,7 +9,6 @@ interface FridayResponse {
 }
 
 function App() {
-  const [isSexta, setIsSexta] = useState<boolean | null>(null)
   const [message, setMessage] = useState<string>('')
   const [dayOfWeek, setDayOfWeek] = useState<string>('')
   const [isLoading, setIsLoading] = useState(true)
@@ -20,7 +19,6 @@ function App() {
     fetch('https://tarefa-api-express.onrender.com/api/is-friday')
       .then(response => response.json())
       .then((data: FridayResponse) => {
-        setIsSexta(data.isFriday)
         setMessage(data.message)
         setDayOfWeek(data.dayOfWeek)
         setIsLoading(false)
